@@ -1,6 +1,7 @@
-import { ScrollView, StyleSheet, Text } from 'react-native'
+import { Pressable, ScrollView, StyleSheet, Text } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import React from 'react'
+import { router } from 'expo-router'
 
 const LegalAdvice = () => {
   return (
@@ -27,6 +28,12 @@ const LegalAdvice = () => {
         Die App erhebt keinen Anspruch darauf, alle Sonderfälle, Umbauten, Zubehörteile oder individuellen Besonderheiten von Fahrrädern abzubilden oder zu bewerten. {"\n"} {"\n"}
         Durch die Nutzung dieser App kommt kein Vertragsverhältnis zwischen dem Nutzer und dem Anbieter zustande.
         </Text>
+
+              <Pressable 
+              style={styles.button} 
+              onPress={() => router.push("/info")}>
+                <Text style={styles.buttonText}>Zurück</Text>
+              </Pressable>
       </ScrollView>
     </SafeAreaView>
   )
@@ -54,5 +61,18 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     flex: 1
+  },
+
+    button: {
+    marginTop: 30,
+    backgroundColor: "#28a745",
+    paddingVertical: 12,
+    borderRadius: 8,
+    alignItems: "center",
+  },
+
+  buttonText: {
+    color: "white",
+    fontWeight: "bold",
   },
 })

@@ -53,7 +53,9 @@ export default function LegalAdvice() {
         © 2026 Jonas Krüger. Alle Rechte vorbehalten.
       </Text>
 
-      <Pressable style={styles.button} onPress={() => router.back()}>
+      <Pressable 
+      style={styles.button} 
+      onPress={() => router.push("/info")}>
         <Text style={styles.buttonText}>Zurück</Text>
       </Pressable>
     </ScrollView>

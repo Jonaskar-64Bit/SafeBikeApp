@@ -63,7 +63,9 @@ export default function Datenschutz() {
 
       <Text style={styles.footer}>Stand: 2026</Text>
 
-      <Pressable style={styles.button} onPress={() => router.back()}>
+      <Pressable 
+      style={styles.button} 
+      onPress={() => router.push("/info")}>
         <Text style={styles.buttonText}>Zurück</Text>
       </Pressable>
     </ScrollView>
