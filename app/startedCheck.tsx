@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, Pressable, ScrollView } from "react-native";
+import { Text, StyleSheet, Pressable, ScrollView } from "react-native";
 import Checkbox from "expo-checkbox";
 import { router } from "expo-router";
 
@@ -24,7 +24,7 @@ export default function StartedCheck() {
   }
 
   function submitCheck() {
-    const allChecked = checklist.every(item => checked[item.id]);
+    const allChecked = checklist.every((item) => checked[item.id]);
 
     router.push({
       pathname: "/endCheck",
@@ -43,14 +43,18 @@ export default function StartedCheck() {
       </Text>
 
       {checklist.map((item) => (
-        <View key={item.id} style={styles.row}>
+        <Pressable
+          key={item.id}
+          style={styles.row}
+          onPress={() => toggleCheckbox(item.id)}
+        >
           <Checkbox
             value={checked[item.id] || false}
-            onValueChange={() => toggleCheckbox(item.id)}
             color={checked[item.id] ? "#28a745" : undefined}
           />
+
           <Text style={styles.label}>{item.label}</Text>
-        </View>
+        </Pressable>
       ))}
 
       <Pressable style={styles.button} onPress={submitCheck}>
@@ -66,6 +70,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     padding: 20,
   },
+
   headline: {
     color: "white",
     fontSize: 30,
@@ -73,20 +78,24 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     marginTop: 50,
   },
+
   text: {
     color: "white",
     marginBottom: 20,
   },
+
   row: {
     flexDirection: "row",
     alignItems: "center",
     marginBottom: 18,
   },
+
   label: {
     color: "white",
     marginLeft: 10,
     flex: 1,
   },
+
   button: {
     marginTop: 30,
     backgroundColor: "#28a745",
@@ -94,6 +103,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     alignItems: "center",
   },
+
   buttonText: {
     color: "white",
     fontWeight: "bold",

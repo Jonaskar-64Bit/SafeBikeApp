@@ -23,14 +23,16 @@ const Check = () => {
 
       {/* Checkbox */}
       <View style={styles.checkboxContainer}>
-        <Checkbox
+        <Pressable style={styles.checkboxContainer} onPress={() => setAccepted(!accepted)}>
+          <Checkbox
           value={accepted}
           onValueChange={setAccepted}
           color={accepted ? "#4caf50" : undefined}
-        />
-        <Text style={styles.checkboxText}>
-          Ich habe den rechtlichen Hinweis gelesen und verstanden.
-        </Text>
+          />
+          <Text style={styles.checkboxText}>
+            Ich habe den rechtlichen Hinweis gelesen und verstanden.
+          </Text>
+        </Pressable>
       </View>
 
       {/* Button */}
