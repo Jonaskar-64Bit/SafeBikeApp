@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { Text, StyleSheet, Pressable, ScrollView } from "react-native";
-import Checkbox from "expo-checkbox";
-import { router } from "expo-router";
+import { Checkbox } from "expo-checkbox";
+import { router, useFocusEffect } from "expo-router";
+import React, { useCallback, useState } from "react";
+import { Pressable, ScrollView, StyleSheet, Text } from "react-native";
 
 const checklist = [
   { id: "frontlight", label: "Vorderlicht (weiß, funktionstüchtig)" },
@@ -15,6 +15,14 @@ const checklist = [
 
 export default function StartedCheck() {
   const [checked, setChecked] = useState<Record<string, boolean>>({});
+
+  // Checkboxen jedes Mal zurücksetzen,
+  // wenn der Check-Screen geöffnet wird
+  useFocusEffect(
+    useCallback(() => {
+      setChecked({});
+    }, []),
+  );
 
   function toggleCheckbox(id: string) {
     setChecked((prev) => ({

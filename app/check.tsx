@@ -1,10 +1,18 @@
-import { StyleSheet, Text, View, Pressable } from "react-native";
-import React, { useState } from "react";
-import Checkbox from "expo-checkbox";
-import { Link, router } from "expo-router";
+import { Checkbox } from "expo-checkbox";
+import { Link, router, useFocusEffect } from "expo-router";
+import React, { useCallback, useState } from "react";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 
 const Check = () => {
   const [accepted, setAccepted] = useState(false);
+
+  // Checkbox jedes Mal zurücksetzen,
+  // wenn die Check-Seite geöffnet wird
+  useFocusEffect(
+    useCallback(() => {
+      setAccepted(false);
+    }, []),
+  );
 
   return (
     <View style={styles.container}>
@@ -14,26 +22,30 @@ const Check = () => {
         Bevor wir starten lese bitte den{" "}
         <Link href="/legalAdvice" style={styles.link}>
           rechtlichen Hinweis
-        </Link>.
+        </Link>
+        .
       </Text>
 
       <Text style={styles.text}>
-        Bitte beantworte die folgenden Fragen, um die Verkehrssicherheit deines Fahrrads zu überprüfen.
+        Bitte beantworte die folgenden Fragen, um die Verkehrssicherheit deines
+        Fahrrads zu überprüfen.
       </Text>
 
       {/* Checkbox */}
-      <View style={styles.checkboxContainer}>
-        <Pressable style={styles.checkboxContainer} onPress={() => setAccepted(!accepted)}>
-          <Checkbox
+      <Pressable
+        style={styles.checkboxContainer}
+        onPress={() => setAccepted((prev) => !prev)}
+      >
+        <Checkbox
           value={accepted}
           onValueChange={setAccepted}
           color={accepted ? "#4caf50" : undefined}
-          />
-          <Text style={styles.checkboxText}>
-            Ich habe den rechtlichen Hinweis gelesen und verstanden.
-          </Text>
-        </Pressable>
-      </View>
+        />
+
+        <Text style={styles.checkboxText}>
+          Ich habe den rechtlichen Hinweis gelesen und verstanden.
+        </Text>
+      </Pressable>
 
       {/* Button */}
       <Pressable
@@ -60,6 +72,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingHorizontal: 20,
   },
+
   headline: {
     fontSize: 30,
     fontWeight: "bold",
@@ -67,22 +80,27 @@ const styles = StyleSheet.create({
     marginTop: 50,
     marginBottom: 20,
   },
+
   text: {
     color: "white",
     marginTop: 20,
     textAlign: "center",
   },
+
   link: {
     color: "#283fa7",
   },
+
   checkboxContainer: {
     flexDirection: "row",
     alignItems: "center",
     marginTop: 30,
   },
+
   checkboxText: {
     color: "white",
     marginLeft: 10,
+    flex: 1,
   },
 
   button: {
@@ -92,13 +110,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: 25,
     borderRadius: 8,
   },
+
   buttonDisabled: {
     backgroundColor: "#555",
     opacity: 0.6,
   },
+
   buttonPressed: {
     opacity: 0.7,
   },
+
   buttonText: {
     color: "white",
     fontWeight: "bold",
